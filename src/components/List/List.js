@@ -1,56 +1,12 @@
 import styles from './List.module.scss';
 import Column from '../Column/Column.js';
 import ColumnForm from '../ColumnForm/ColumnForm.js';
-import { useState } from 'react';
-import shortid from 'shortid';
+import { useSelector } from 'react-redux';
 
 
 const List = () => {
 
-    const [columns, setColumns] = useState([
-                {
-            id: 1,
-            title: 'Books',
-            icon: 'book',
-            cards: [
-                { id: 1, title: 'This is Going to Hurt' },
-                { id: 2, title: 'Interpreter of Maladies' }
-            ]
-        },
-                {
-            id: 2,
-            title: 'Movies',
-            icon: 'film',
-            cards: [
-                { id: 1, title: 'Harry Potter' },
-                { id: 2, title: 'Star Wars' }
-            ]
-        },
-                {
-            id: 3,
-            title: 'Games',
-            icon: 'gamepad',
-            cards: [
-                { id: 1, title: 'The Witcher' },
-                { id: 2, title: 'Skyrim' }
-            ]
-        }
-    ]);
-    
-    const addColumn = newColumn => {
-        setColumns([...columns, { id: shortid(), title: newColumn.title, icon: newColumn.icon, cards: [] }]);
-    };
-
-    const addCard = (newCard) => {
-        const updatedColumns = columns.map(column => {
-            if(column.id === newCard.id)
-                return {...column, cards: [...column.cards, { title: newCard.title, id: shortid() }]};
-            else 
-                return column;    
-        });
-
-        setColumns(updatedColumns);
-    };
+    const columns = useSelector(state => state.columns);
     
     return (
         <div className={styles.list}>
@@ -59,9 +15,9 @@ const List = () => {
             </header> 
             <p className={styles.description}>Interesting things I want to check out!</p>
             <section className={styles.columns}>
-                {columns.map(column => < Column id={column.id} title={column.title} icon={column.icon} cards={column.cards} cardAction={addCard}/>)}
+                {columns.map(column => < Column key={column.id} {...column} />)}
             </section>
-           < ColumnForm action={addColumn} />
+           < ColumnForm />
         </div>
     );
 };
