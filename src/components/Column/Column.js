@@ -2,6 +2,7 @@ import styles from './Column.module.scss';
 import Card from '../Card/Card.js';
 import CardForm from '../CardForm/CardForm';
 import { useSelector } from 'react-redux';
+
 const Column = (props) => {
     
     const cards = useSelector(state => state.cards).filter(card => card.columnId === props.id);
