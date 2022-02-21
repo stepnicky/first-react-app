@@ -2,18 +2,18 @@ import TextInput from '../TextInput/TextInput.js';
 import Button from '../Button/Button.js';
 import styles from './SearchForm.module.scss';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { findCard } from '../../redux/store.js';
 
 const SearchForm = () => {
 
-    const [title, setTitle] = useState('');
+    const cardPicker = useSelector(state => state.cardPicker);
+    const [title, setTitle] = useState(cardPicker);
     const dispatch = useDispatch();
 
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(findCard({ title }));
-        setTitle('');
     }
 
     return (
