@@ -1,10 +1,23 @@
+import styles from './Favourite.module.scss';
 import PageTitle from '../PageTitle/PageTitle.js';
+import { useSelector } from 'react-redux';
+import { getFavouritedCards } from '../../redux/store.js';
+import Card from '../Card/Card.js';
 
 const Favourite = () => {
+
+    const cards = useSelector(getFavouritedCards);
+
     return (
         <div>
             <PageTitle>Favourite</PageTitle>
-            <p>Lorem Ipsum.</p>
+            <div className={styles.flexWrapper}>
+            <article className={styles.column}>
+                <ul className={styles.cards}>
+                    {cards.map(card => <Card key={card.id} cardId={card.id}>{card.title}</Card>)}
+                </ul>
+            </article>
+            </div>
         </div>
     );
 };
