@@ -3,7 +3,7 @@ import Button from '../Button/Button.js';
 import styles from './SearchForm.module.scss';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { findCard } from '../../redux/store.js';
+import { findCard } from '../../redux/cardPickerReducer.js';
 
 const SearchForm = () => {
 
@@ -13,7 +13,7 @@ const SearchForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(findCard({ title }));
+        dispatch(findCard(title));
     }
 
     return (

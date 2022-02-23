@@ -12,7 +12,7 @@
     font-weight: bold;
 }
 
-.icon {
+.favouriteIcon {
     border: none;
     color: $color-success;
     background-color: $color-light;
@@ -25,4 +25,15 @@
 
 .isActive {
     color: darken($color-success, 50%);
+}
+
+.removeIcon {
+    border: none;
+    color: darken($color-light, 50%);
+    background-color: $color-light;
+    cursor: pointer;
+    transition: $transition;
+    &:hover {
+        color: $color-dark;
+    }
 }
